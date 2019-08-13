@@ -1,20 +1,21 @@
 import { Controller, Get, Put, Post, Delete, Req, Param, ParseUUIDPipe, Body } from '@nestjs/common';
-import { AppService } from '../app.service';
+import { ArticlesService } from '../service/articles.service';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
-import { CreateArticleDto } from './dto/create-article.dto';
+import { CreateArticleDto } from '../create-article.dto';
 
 @Controller('articles')
 export class ArticlesController {
-    constructor(private readonly appService: AppService) {}
+    constructor(private readonly articleService: ArticlesService) {}
     @Get()
   findAllArticles(@Req() request: Request): Observable<any[]> {
     return of([]);
   }
 
     @Get(':uuid')
-  getOneArticle(@Param('uuid', new ParseUUIDPipe()) uuid): string {
-    return `This action returns a ${uuid} article`;
+  async getOneArticle(@Param('uuid', new ParseUUIDPipe()) uuid): Promise<any> {
+      return await this.articleService.getFoo();
+      // return `This action returns a ${uuid} article`;
   }
 
   @Post()
@@ -24,11 +25,11 @@ export class ArticlesController {
 
   @Put()
   putOneArticle(): string {
-    return this.appService.getHello();
+    return ArticlesService.getHello();
   }
 
   @Delete()
   deleteOneArticle(): string {
-    return this.appService.getHello();
+    return ArticlesService.getHello();
   }
 }
