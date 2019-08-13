@@ -2,7 +2,7 @@ import { Controller, Get, Put, Post, Delete, Req, Param, ParseUUIDPipe, Body } f
 import { AppService } from '../app.service';
 import { Request } from 'express';
 import { Observable, of } from 'rxjs';
-import { CreateArticleDto } from './model/create-article.dto';
+import { CreateArticleDto } from './dto/create-article.dto';
 
 @Controller('articles')
 export class ArticlesController {
