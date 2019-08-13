@@ -21,6 +21,14 @@ export class ArticlesService {
         });
     }
 
+    getBar(): Promise<any> {
+        return new Promise( (resolve, reject) => {
+            setTimeout(() => {
+                resolve('bar');
+            }, 3000);
+        });
+    }
+
     static getHello(): string {
         return 'Hello World!';
     }

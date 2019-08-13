@@ -14,7 +14,9 @@ export class ArticlesController {
 
     @Get(':uuid')
   async getOneArticle(@Param('uuid', new ParseUUIDPipe()) uuid): Promise<any> {
-      return await this.articleService.getFoo();
+      return Promise.all([this.articleService.getFoo(), this.articleService.getBar()]).then((values) => {
+        return values[0] + ' ' + values[1] + ' ' + `${uuid}`;
+      });
       // return `This action returns a ${uuid} article`;
   }
 
