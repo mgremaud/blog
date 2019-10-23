@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  blog-db:
+    image: "mariadb"
+    container_name: "blog-db"
+    hostname: "blog-db"
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: blog
+    ports:
+      - "3308:3306"
+    networks:
+      - "default"
+    volumes:
+      - "./var/mysql:/var/lib/mysql"
+
+  blog-adminer:
+    image: "adminer"
+    container_name: "blog-adminer"
+    hostname: "blog-adminer"
+    ports:
+      - "8080:8080"
+    networks:
+      - "default"
+
+networks:
+  default:
+    driver: "bridge"
